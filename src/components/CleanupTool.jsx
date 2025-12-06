@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { CircleCheck } from "lucide-react";
+import { t } from "../utils/helpers.js";
+import { translations } from "../utils/translations.js";
 
-export default function CleanupTool({ darkMode }) {
+export default function CleanupTool({ darkMode, language = "english" }) {
   const [folderPath, setFolderPath] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -162,12 +164,12 @@ export default function CleanupTool({ darkMode }) {
 
   return (
     <div>
-      <h1 style={styles.heading}>Folder Cleanup Tool</h1>
+      <h1 style={styles.heading}>{t(translations, language, "cleanupHeading")}</h1>
 
       <div style={{ display: "flex", alignItems: "center", gap: 0 }}>
         <input
           type="text"
-          placeholder="Enter full folder path"
+          placeholder={t(translations, language, "enterFolderPath")}
           value={folderPath}
           onChange={(e) => setFolderPath(e.target.value)}
           onFocus={() => setInputFocused(true)}
@@ -183,7 +185,7 @@ export default function CleanupTool({ darkMode }) {
           }}
           aria-label="Get cleanup suggestions"
         >
-          {loading ? "Scanning..." : "Get Cleanup Suggestions"}
+          {loading ? t(translations, language, "scanning") : t(translations, language, "scan")}
         </button>
       </div>
 
@@ -191,7 +193,7 @@ export default function CleanupTool({ darkMode }) {
 
       {suggestions.length > 0 && (
         <>
-          <h2 style={styles.sectionHeading}>Suggested for Deletion</h2>
+          <h2 style={styles.sectionHeading}>{t(translations, language, "deleteSelected")}</h2>
           <ul style={styles.listContainer}>
             {suggestions.map((item, idx) => (
               <li key={idx} style={styles.listItem} title={item.path}>
@@ -211,7 +213,7 @@ export default function CleanupTool({ darkMode }) {
             }}
             aria-label="Delete all suggested files and folders"
           >
-            {deleting ? "Deleting..." : "Delete All"}
+            {deleting ? t(translations, language, "deleting") : t(translations, language, "deleteSelected")}
           </button>
         </>
       )}

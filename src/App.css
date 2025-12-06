@@ -5,11 +5,17 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: auto;
+  overflow-anchor: none;
+}
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 /* App Container */
@@ -309,7 +315,7 @@ body {
   position: absolute;
   top: 48px;
   right: 0;
-  z-index: 50;
+  z-index: 100;
   opacity: 0;
   visibility: hidden;
   transform: translateY(-10px);
@@ -320,6 +326,8 @@ body {
   border-radius: 12px;
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
   min-width: 200px;
+  max-height: 400px;
+  overflow-y: auto;
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -335,6 +343,30 @@ body {
   display: flex;
   flex-direction: column;
   gap: 8px;
+}
+
+/* Language dropdown select styling */
+.hover-popup .popup-container select {
+  max-height: 300px;
+  overflow-y: auto;
+  background: rgba(28, 4, 38, 0.95);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.hover-popup .popup-container select option {
+  background: #1c0426;
+  color: white;
+  padding: 8px;
+}
+
+.hover-popup .popup-container select:focus {
+  outline: none;
+  border-color: rgba(255, 255, 255, 0.4);
 }
 
 .language-option {

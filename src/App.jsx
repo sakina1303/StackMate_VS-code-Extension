@@ -28,6 +28,7 @@ import PluginManager from "./components/PluginManager.jsx";
 
 import { translations } from "./utils/translations.js";
 import { useNotes } from "./utils/useNotes.js";
+import { t } from "./utils/helpers.js";
 
 import "./App.css";
 import "./components/PluginManager.css";
@@ -218,7 +219,7 @@ const App = () => {
         <div onClick={() => handleToolClick("notes")} className="tool-card">
           <div className="tool-card-content">
             <StickyNote className="tool-icon" />
-            <h3 className="tool-title">Notes</h3>
+            <h3 className="tool-title">{t(translations, language, "notes")}</h3>
           </div>
         </div>
         <div
@@ -227,7 +228,7 @@ const App = () => {
         >
           <div className="tool-card-content">
             <FileText className="tool-icon" />
-            <h3 className="tool-title">JSON Validator</h3>
+            <h3 className="tool-title">{t(translations, language, "jsonValidator")}</h3>
           </div>
         </div>
         <div
@@ -236,19 +237,19 @@ const App = () => {
         >
           <div className="tool-card-content">
             <ExternalLink className="tool-icon" />
-            <h3 className="tool-title">Stack Overflow</h3>
+            <h3 className="tool-title">{t(translations, language, "stackOverflow")}</h3>
           </div>
         </div>
         <div onClick={() => handleToolClick("cleanup")} className="tool-card">
           <div className="tool-card-content">
             <BrushCleaning className="tool-icon" />
-            <h3 className="tool-title">Cleanup Tool</h3>
+            <h3 className="tool-title">{t(translations, language, "cleanupTool")}</h3>
           </div>
         </div>
         <div onClick={() => handleToolClick("stats")} className="tool-card">
           <div className="tool-card-content">
             <ChartNoAxesCombined className="tool-icon" />
-            <h3 className="tool-title">Coding Stats</h3>
+            <h3 className="tool-title">{t(translations, language, "codingStats")}</h3>
           </div>
         </div>
         <div
@@ -257,15 +258,15 @@ const App = () => {
         >
           <div className="tool-card-content">
             <Puzzle className="tool-icon" />
-            <h3 className="tool-title">Plugin Manager</h3>
+            <h3 className="tool-title">{t(translations, language, "pluginManager")}</h3>
           </div>
         </div>
       </div>
 
       <div className="dev-tips-section">
-        <h2 className="section-title">Dev Tips</h2>
+        <h2 className="section-title">{t(translations, language, "devTips")}</h2>
         <div className="dev-tips-container">
-          <DevTip />
+          <DevTip {...commonProps} />
         </div>
       </div>
     </div>
@@ -299,7 +300,7 @@ const App = () => {
               />
               {showColorPicker && (
                 <div className="color-picker-popup">
-                  <ColorPicker />
+                  <ColorPicker language={language} />
                 </div>
               )}
             </div>
@@ -344,7 +345,7 @@ const App = () => {
               value={searchQuery}
               onChange={handleSearchChange}
               onKeyDown={handleKeyDown}
-              placeholder="search with @stack @json @notes @plugins @github @eslint @test ..."
+              placeholder={translations[language]?.dashboardSearchPlaceholder || "search with @stack @json @notes @plugins @github @eslint @test ..."}
               rows={1}
               style={{
                 position: "relative",
@@ -394,7 +395,7 @@ const App = () => {
             }}
             className="back-button"
           >
-            ← Back to Dashboard
+            {translations[language]?.backToDashboard || "← Back to Dashboard"}
           </button>
         )}
 

@@ -8,6 +8,8 @@ import {
   ResponsiveContainer,
   CartesianGrid,
 } from "recharts";
+import { t } from "../utils/helpers.js";
+import { translations } from "../utils/translations.js";
 
 const API = "http://localhost:5070";
 
@@ -18,7 +20,7 @@ function formatTime(seconds) {
   return `${h}h ${m}m ${s}s`;
 }
 
-function CodingStats({ darkMode }) {
+function CodingStats({ darkMode, language = "english" }) {
   const [totalTimeSec, setTotalTimeSec] = useState(0);
   const [totalSessions, setTotalSessions] = useState(0);
   const [sessions, setSessions] = useState([]);
@@ -250,21 +252,21 @@ function CodingStats({ darkMode }) {
   return (
     <div>
       <div style={cardStyle}>
-        <h2 style={headingStyle}>Total Coding Time</h2>
+        <h2 style={headingStyle}>{t(translations, language, "totalTime")}</h2>
         <p style={durationStyle}>{formatTime(totalTimeSec)}</p>
-        <p>Total Sessions: {totalSessions}</p>
+        <p>{t(translations, language, "totalSessions")}: {totalSessions}</p>
         {activeSession ? (
           <button style={buttonStyle} onClick={handleStop}>
-            Stop Session (Active: {formatTime(activeTimeSec)})
+            {t(translations, language, "stopSession")} ({t(translations, language, "activeSession")}: {formatTime(activeTimeSec)})
           </button>
         ) : (
           <button style={buttonStyle} onClick={handleStart}>
-            Start Session
+            {t(translations, language, "startSession")}
           </button>
         )}
       </div>
       <div style={chartContainerStyle}>
-        <h2 style={headingStyle}>Weekly Coding Stats</h2>
+        <h2 style={headingStyle}>{t(translations, language, "weeklyChart")}</h2>
         <div style={{ width: "100%", height: 250 }}>
           <ResponsiveContainer width="100%" height="100%">
             <LineChart data={weeklyData}>
@@ -287,9 +289,9 @@ function CodingStats({ darkMode }) {
         </div>
       </div>
       <div style={cardStyle}>
-        <h2 style={headingStyle}>Past Sessions</h2>
+        <h2 style={headingStyle}>{t(translations, language, "codingStatsHeading")}</h2>
         <div style={sessionsListStyle}>
-          {sessions.length === 0 && <p>No sessions recorded yet.</p>}
+          {sessions.length === 0 && <p>{t(translations, language, "noSessions")}</p>}
           {sessions
             .slice(-5)
             .reverse()

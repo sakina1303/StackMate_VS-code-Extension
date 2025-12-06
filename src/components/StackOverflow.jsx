@@ -6,8 +6,10 @@ import {
   ArrowBigUp,
   CheckCheck,
 } from "lucide-react";
+import { t } from "../utils/helpers.js";
+import { translations } from "../utils/translations.js";
 
-const StackOverflow = ({ query: initialQuery = "", darkMode }) => {
+const StackOverflow = ({ query: initialQuery = "", darkMode, language = "english" }) => {
   const [query, setQuery] = useState(initialQuery);
   const [suggestions, setSuggestions] = useState([]);
   const [selectedQuestion, setSelectedQuestion] = useState(null);
@@ -308,12 +310,12 @@ const StackOverflow = ({ query: initialQuery = "", darkMode }) => {
 
   return (
     <div>
-      <h2 style={headingStyle}>StackOverflow Search</h2>
+      <h2 style={headingStyle}>{t(translations, language, "stackOverflowSearch")}</h2>
       <div style={{ position: "relative", marginBottom: 16 }}>
         <textarea
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="Search StackOverflow..."
+          placeholder={t(translations, language, "searchPlaceholder")}
           style={inputStyle}
           rows={1}
         />
@@ -382,7 +384,7 @@ const StackOverflow = ({ query: initialQuery = "", darkMode }) => {
           <div style={questionMetaStyle}>
             <p style={questionScoreStyle}>
               <ArrowBigUp size={22} style={{ marginRight: 2 }} />
-              {selectedQuestion.score} votes
+              {selectedQuestion.score} {t(translations, language, "votes")}
             </p>
             <div style={suggestionTagsStyle}>
               {selectedQuestion.tags?.map((tag) => (

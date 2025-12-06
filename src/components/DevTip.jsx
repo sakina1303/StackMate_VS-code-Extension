@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { RefreshCw } from 'lucide-react';
+import { t } from '../utils/helpers.js';
+import { translations } from '../utils/translations.js';
 
 const DEV_TIPS = [
     "Write code that tells a story - future you will thank present you.",
@@ -77,7 +79,7 @@ const DEV_TIPS = [
     "Keep learning - technology evolves, and so should you."
 ];
 
-const DevTip = () => {
+const DevTip = ({ language = "english" }) => {
     const [devTip, setDevTip] = useState("");
     const [loading, setLoading] = useState(false);
     const [usedTips, setUsedTips] = useState(new Set());
@@ -181,7 +183,7 @@ const DevTip = () => {
     return (
         <div style={containerStyle}>
             {loading ? (
-                <p style={tipStyle}>Loading wisdom...</p>
+                <p style={tipStyle}>{t(translations, language, "loading")}</p>
             ) : (
                 <p style={tipStyle}>{devTip}</p>
             )}
@@ -191,7 +193,7 @@ const DevTip = () => {
                 disabled={loading}
                 onMouseEnter={(e) => handleButtonHover(e, true)}
                 onMouseLeave={(e) => handleButtonHover(e, false)}
-                title="Get new tip"
+                title={t(translations, language, "refreshTip")}
             >
                 <RefreshCw style={iconStyle} />
             </button>

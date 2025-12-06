@@ -26,3 +26,8 @@ export const hexToRgb = (hex) => {
     const b = bigint & 255;
     return `rgb(${r}, ${g}, ${b})`;
 };
+
+// Translation helper - falls back to English if key is missing
+export const t = (translations, language, key) => {
+    return translations[language]?.[key] || translations.english?.[key] || key;
+};

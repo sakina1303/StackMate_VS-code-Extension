@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { HexColorPicker } from 'react-colorful';
+import { t } from '../utils/helpers.js';
+import { translations } from '../utils/translations.js';
 
 // Helper functions
 const hexToRgb = (hex) => {
@@ -71,7 +73,7 @@ const showMessage = (message) => {
     }, 2700);
 };
 
-const ColorPicker = () => {
+const ColorPicker = ({ language = "english" }) => {
     const [selectedColor, setSelectedColor] = useState("#2B77BD");
     const [colorFormat, setColorFormat] = useState("hex");
     const [showPicker, setShowPicker] = useState(false);
@@ -236,7 +238,7 @@ const ColorPicker = () => {
 
     return (
         <div style={containerStyle}>
-            <div style={titleStyle}>Color Picker</div>
+            <div style={titleStyle}>{t(translations, language, "colorPicker")}</div>
 
             <div style={pickerSectionStyle}>
                 <div style={{ position: "relative" }}>
@@ -253,7 +255,7 @@ const ColorPicker = () => {
                         }}
                     >
                         <div style={colorBoxTextStyle}>
-                            {showPicker ? "" : "Click to pick color"}
+                            {showPicker ? "" : t(translations, language, "clickToPickColor")}
                         </div>
                     </div>
 
@@ -294,14 +296,14 @@ const ColorPicker = () => {
                         e.target.style.boxShadow = "0 4px 16px rgba(0, 0, 0, 0.2)";
                     }}
                 >
-                    Copy {colorFormat.toUpperCase()}
+                    {colorFormat === "hex" ? t(translations, language, "copyHex") : t(translations, language, "copyRgb")}
                 </button>
             </div>
 
             <div style={previewStyle}>
                 <div>
                     <div style={{ fontSize: "12px", color: "#7f8c8d", marginBottom: "8px", fontWeight: "500" }}>
-                        Selected Color:
+                        {t(translations, language, "selectedColor")}
                     </div>
                     <div style={colorValueStyle}>
                         {getColorValue()}

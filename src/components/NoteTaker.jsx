@@ -1,4 +1,5 @@
 import React from "react";
+import { t } from "../utils/helpers.js";
 
 const NoteTaker = ({
   note,
@@ -74,7 +75,7 @@ const NoteTaker = ({
         </button>
       </div>
 
-      {warning && <div style={warningStyle}>{warning}</div>}
+      {warning && <div style={warningStyle}>{t(translations, language, "cannotSaveEmpty")}</div>}
     </div>
   );
 };
