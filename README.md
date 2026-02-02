@@ -64,7 +64,7 @@ Wondering how to run the extension? here you go:
 
 ### Tadaaa! Your note-taking UI will now appear!
 
-## 🔌 Plugin System
+##  Plugin System
 
 StackMate now includes a powerful plugin system! Access it by:
 
